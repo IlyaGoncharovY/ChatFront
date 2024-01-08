@@ -25,13 +25,16 @@ function App() {
   };
 
   const onClickSocketHandler = () => {
-    socket.emit('click-message-emit', message);
+    socket.emit('click-message-sent', message);
     setMessage('');
   };
 
   useEffect(() => {
     socket.on('init-messages-published', (messages: MessagesType[]) => {
       setMessages(messages);
+    });
+    socket.on('new-message-sent', (message: MessagesType) => {
+      setMessages(prevState => [...prevState, message]);
     });
   }, []);
 
