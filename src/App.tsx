@@ -1,22 +1,45 @@
-import {useEffect, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {io} from 'socket.io-client';
+
+const socket = io('http://localhost:3009');
+
+type UserType = {
+    id: string
+    name: string
+}
+
+type MessagesType = {
+    message: string,
+    id: string,
+    user: UserType
+}
 
 function App() {
 
-  const [messages, setMessages] = useState([
-    {message: 'hello Vasya', id: 'e1q1q1q', user: {id: '22w2w2ww', name: 'Ilya'}},
-    {message: 'hello Ilya', id: '1a1a1a', user: {id: '2s2s2s', name: 'Vasya'}},
-  ]);
+  const [messages, setMessages] = useState<MessagesType[]>([]);
+
+  const [message, setMessage] = useState<string>('');
+
+  const onChangeTextareaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.currentTarget.value);
+  };
+
+  const onClickSocketHandler = () => {
+    socket.emit('click-message-emit', message);
+    setMessage('');
+  };
 
   useEffect(() => {
-    const socket = io('http://localhost:3009');
+    socket.on('init-messages-published', (messages: MessagesType[]) => {
+      setMessages(messages);
+    });
   }, []);
 
   return (
     <div style={{
       display: 'flex',
-      justifyContent:'center',
-      alignItems:'center',
+      justifyContent: 'center',
+      alignItems: 'center',
     }}>
       <div>
         <div style={{
@@ -26,14 +49,17 @@ function App() {
           overflow: 'scroll',
           width: '300px',
         }}>
-          {messages.map((message) =>
+          {messages.map((message: MessagesType) =>
             <div key={message.id}>
               <b>{message.user.name}:</b> {message.message}
               <hr/>
             </div>)}
         </div>
-        <textarea></textarea>
-        <button>send</button>
+        <textarea
+          value={message}
+          onChange={onChangeTextareaHandler}>
+        </textarea>
+        <button onClick={onClickSocketHandler}>send</button>
       </div>
     </div>
   );
