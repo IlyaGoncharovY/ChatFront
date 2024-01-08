@@ -20,13 +20,23 @@ function App() {
 
   const [message, setMessage] = useState<string>('');
 
+  const [name, setName] = useState<string>('');
+
   const onChangeTextareaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.currentTarget.value);
+  };
+
+  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.currentTarget.value);
   };
 
   const onClickSocketHandler = () => {
     socket.emit('click-message-sent', message);
     setMessage('');
+  };
+
+  const onClickNameHandler = () => {
+    socket.emit('client-name-sent', name);
   };
 
   useEffect(() => {
@@ -58,6 +68,8 @@ function App() {
               <hr/>
             </div>)}
         </div>
+        <input type="text" value={name} onChange={onChangeInputHandler}/>
+        <button onClick={onClickNameHandler}>send name</button>
         <textarea
           value={message}
           onChange={onChangeTextareaHandler}>
