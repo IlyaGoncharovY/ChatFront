@@ -29,11 +29,8 @@ function App() {
   const dispatch = useAppDispatch();
 
   const [message, setMessage] = useState<string>('');
-
   const [name, setName] = useState<string>('');
-
   const [isAutoScroll, setIsAutoScroll] = useState<boolean>(true);
-
   const [lastScrollTop, setLastScrollTop] = useState<number>(0);
 
   const messageBlockRef = useRef<HTMLDivElement>(null);
@@ -82,7 +79,7 @@ function App() {
       messageBlockRef.current?.scrollIntoView({behavior: 'smooth'});
     }
   }, [isAutoScroll, messages]);
-  console.log(typingUsers);
+
   return (
     <div style={{
       display: 'flex',
@@ -118,7 +115,7 @@ function App() {
           <textarea
             value={message}
             onChange={onChangeTextareaHandler}
-            onKeyPress={typeUserMessageHandler}
+            onKeyDown={typeUserMessageHandler}
           >
           </textarea>
           <button onClick={onClickSocketHandler}>send</button>

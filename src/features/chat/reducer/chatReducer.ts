@@ -31,13 +31,16 @@ const chatSlice = createSlice({
       state.messages = action.payload;
     },
     setNewMessage: (state, action: PayloadAction<MessageType>) => {
-      state.messages.push(action.payload);
-      // state.typingUsers = state.typingUsers.filter(user => user.id !== action.payload.user.id);
-      state.typingUsers.filter(u => u.id !== action.payload.user.id);
+      return {...state,
+        messages: [...state.messages, action.payload],
+        typingUsers: state.typingUsers.filter(el => el.id !== action.payload.user.id),
+      };
     },
     setTypingUsers: (state, action: PayloadAction<UserType>) => {
-      // state.typingUsers = state.typingUsers.filter(user => user.id !== action.payload.id);
-      return {...state, typingUsers: [...state.typingUsers.filter(u => u.id !== action.payload.id), action.payload]};
+      return {...state,
+        typingUsers: [...state.typingUsers.filter(u =>
+          u.id !== action.payload.id), action.payload,
+        ]};
     },
   },
 });
@@ -51,8 +54,9 @@ export const createConnectionTC = (): AppThunk =>
   (dispatch) => {
     api.createConnection();
     api.subscribe(
-      (messages) => {
+      (messages, fn: (data: string) => void) => {
         dispatch(setMessages(messages));
+        fn('data from front');
       },
       (message) => {
         dispatch(setNewMessage(message));

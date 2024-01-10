@@ -2,14 +2,6 @@ import {io, Socket} from 'socket.io-client';
 
 import {MessageType, UserType} from '../features/chat/reducer/chatReducer.ts';
 
-//const socket = io('http://localhost:3009');
-// socket.on('init-messages-published', (messages: MessagesType[]) => {
-//     setMessages(messages);
-// });
-// socket.on('new-message-sent', (message: MessagesType) => {
-//     setMessages(prevState => [...prevState, message]);
-// });
-
 export const api = {
   socket: null as null | Socket,
 
@@ -17,7 +9,7 @@ export const api = {
     this.socket = io('http://localhost:3009');
   },
   subscribe(
-    initMessagesHandler: (messages: MessageType[]) => void,
+    initMessagesHandler: (messages: MessageType[], fn: () => void) => void,
     newMessageSentHandler: (message: MessageType) => void,
     userTypingHandler: (user: UserType) => void,
   ) {
@@ -29,7 +21,11 @@ export const api = {
     this.socket?.emit('client-name-sent', name);
   },
   sendMessage (message: string) {
-    this.socket?.emit('click-message-sent', message);
+    this.socket?.emit('click-message-sent', message, (error: string | null) => {
+      if(error) {
+        alert(error);
+      }
+    });
   },
   typeMessage () {
     this.socket?.emit('client-typed');
