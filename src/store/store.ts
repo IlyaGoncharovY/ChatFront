@@ -1,10 +1,15 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 
-import chatReducer from '../features/chat/reducer/chatReducer.ts';
+import appReducer from '../features/app/reducer/appReducer.ts';
+import chatDisplayReducer from '../features/chatDisplay/reducer/chatDisplayReducer.ts';
+import controlButtonsReducer from "../features/controlButtons/reducer/controlButtonsReducer.ts";
 
 export const store = configureStore({
   reducer: {
-    chat: chatReducer,
+    app: appReducer,
+    messages: chatDisplayReducer,
+    typingUsers: chatDisplayReducer,
+    buttons: controlButtonsReducer,
   },
 });
 
