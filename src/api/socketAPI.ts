@@ -1,6 +1,5 @@
 import {io, Socket} from 'socket.io-client';
-
-import {MessageType, UserType} from '../features/chat/reducer/chatReducer.ts';
+import {MessageType, UserType} from "../features/chatDisplay";
 
 export const api = {
   socket: null as null | Socket,
