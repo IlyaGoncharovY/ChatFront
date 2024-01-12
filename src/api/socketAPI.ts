@@ -1,5 +1,6 @@
 import {io, Socket} from 'socket.io-client';
 import {MessageType, UserType} from "../features/chatDisplay";
+import {SOCKET_KEY} from "./socketKey.ts";
 
 export const api = {
   socket: null as null | Socket,
@@ -12,22 +13,22 @@ export const api = {
     newMessageSentHandler: (message: MessageType) => void,
     userTypingHandler: (user: UserType) => void,
   ) {
-    this.socket?.on('init-messages-published', initMessagesHandler);
-    this.socket?.on('new-message-sent',newMessageSentHandler);
-    this.socket?.on('user-typing',userTypingHandler);
+    this.socket?.on(SOCKET_KEY.INIT_MESSAGE, initMessagesHandler);
+    this.socket?.on(SOCKET_KEY.NEW_MESSAGE_SENT,newMessageSentHandler);
+    this.socket?.on(SOCKET_KEY.USER_TYPING,userTypingHandler);
   },
   sendName (name: string) {
-    this.socket?.emit('client-name-sent', name);
+    this.socket?.emit(SOCKET_KEY.CLIENT_NAME, name);
   },
   sendMessage (message: string) {
-    this.socket?.emit('click-message-sent', message, (error: string | null) => {
+    this.socket?.emit(SOCKET_KEY.MESSAGE_SENT, message, (error: string | null) => {
       if(error) {
         alert(error);
       }
     });
   },
   typeMessage () {
-    this.socket?.emit('client-typed');
+    this.socket?.emit(SOCKET_KEY.CLIENT_TYPED);
   },
   destroyConnection() {
     this.socket?.disconnect();
