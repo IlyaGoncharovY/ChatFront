@@ -1,0 +1,6 @@
+.controlButtonsContainer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 85vw;
+}

@@ -1,0 +1,11 @@
+.messageContainer {
+    margin-bottom: 10px;
+}
+
+.userMessage {
+    align-self: flex-end;
+}
+
+.otherMessage {
+    align-self: flex-start;
+}

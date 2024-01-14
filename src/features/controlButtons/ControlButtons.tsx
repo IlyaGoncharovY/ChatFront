@@ -1,7 +1,10 @@
 import {ChangeEvent, useState} from 'react';
 
-import {setClientNameTC, setNewMessageTC, typeMessageTC} from './reducer/controlButtonsReducer.ts';
 import {useAppDispatch} from '../../store';
+
+import {setClientName, setClientNameTC, setNewMessageTC, typeMessageTC} from './reducer/controlButtonsReducer.ts';
+
+import s from './ControlButtons.module.css';
 
 export const ControlButtons = () => {
 
@@ -25,6 +28,7 @@ export const ControlButtons = () => {
 
   const onClickNameHandler = () => {
     dispatch(setClientNameTC(name));
+    dispatch(setClientName(name));
   };
 
   const typeUserMessageHandler = () => {
@@ -33,7 +37,7 @@ export const ControlButtons = () => {
 
 
   return (
-    <div>
+    <div className={s.controlButtonsContainer}>
       <div>
         <input type="text" value={name} onChange={onChangeInputHandler}/>
         <button onClick={onClickNameHandler}>send name</button>
