@@ -7,6 +7,8 @@ import {ControlButtons} from '../controlButtons';
 
 import {createConnectionTC, destroyConnectionTC} from './reducer/appReducer.ts';
 
+import s from './App.module.css';
+
 function App() {
 
   const dispatch = useAppDispatch();
@@ -19,12 +21,8 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <div>
+    <div className={s.appContainer}>
+      <div className={s.chatAndButtonsContainer}>
         <ChatDisplay/>
         <ControlButtons/>
       </div>
