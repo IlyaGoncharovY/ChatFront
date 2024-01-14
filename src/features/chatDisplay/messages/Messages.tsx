@@ -6,6 +6,8 @@ import {MessageType} from '../reducer/chatDisplayReducer.ts';
 
 import {MessagesItem} from './item/MessagesItem.tsx';
 
+import s from './Messages.module.css';
+
 export const Messages = () => {
 
   const messages = useAppSelector(state => state.messages.messages);
@@ -33,18 +35,12 @@ export const Messages = () => {
   }, [isAutoScroll, messages]);
 
   return (
-    <div style={{
-      border: '1px solid black',
-      padding: '10px',
-      height: '300px',
-      overflow: 'scroll',
-      width: '300px',
-    }}
-    onScroll={scrollEventHandler}
-    >
-      {messages.map((message: MessageType) =>
-        <MessagesItem key={message.id} message={message}/>)}
-      <div ref={messageBlockRef}/>
+    <div className={s.messagesContainer} onScroll={scrollEventHandler}>
+      <div className={s.messagesContent}>
+        {messages.map((message: MessageType) =>
+          <MessagesItem key={message.id} message={message}/>)}
+        <div ref={messageBlockRef}/>
+      </div>
     </div>
   );
 };
