@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import {MessageType} from '../../../chat/reducer';
+import {MessageType} from '../../reducer/chatDisplayReducer.ts';
 
 interface IMessagesItem{
     message: MessageType

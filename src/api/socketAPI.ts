@@ -1,12 +1,16 @@
 import {io, Socket} from 'socket.io-client';
-import {MessageType, UserType} from "../features/chatDisplay";
-import {SOCKET_KEY} from "./socketKey.ts";
+
+import {MessageType, UserType} from '../features/chatDisplay';
+
+import {SOCKET_KEY} from './socketKey.ts';
+
+const BACK_URL = import.meta.env.VITE_REACT_APP_BACK_URL;
 
 export const api = {
   socket: null as null | Socket,
 
   createConnection() {
-    this.socket = io('http://localhost:3009');
+    this.socket = io(BACK_URL || 'http://localhost:3009');
   },
   subscribe(
     initMessagesHandler: (messages: MessageType[], fn: () => void) => void,

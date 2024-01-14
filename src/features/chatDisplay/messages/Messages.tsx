@@ -1,6 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
 
-
 import {useAppSelector} from '../../../store';
 
 import {MessageType} from '../reducer/chatDisplayReducer.ts';

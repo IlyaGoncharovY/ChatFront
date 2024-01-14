@@ -1,5 +1,6 @@
 import {FC} from 'react';
-import {UserType} from "../../reducer/chatDisplayReducer.ts";
+
+import {UserType} from '../../reducer/chatDisplayReducer.ts';
 
 interface ITypingUserItem {
     user: UserType
