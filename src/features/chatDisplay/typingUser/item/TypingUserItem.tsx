@@ -2,13 +2,15 @@ import {FC} from 'react';
 
 import {UserType} from '../../reducer/chatDisplayReducer.ts';
 
+import s from './TypingUser.module.css';
+
 interface ITypingUserItem {
     user: UserType
 }
 
 export const TypingUserItem:FC<ITypingUserItem> = ({user}) => {
   return (
-    <div>
+    <div className={s.typingUserContainer}>
       <b>{user.name}:</b> .....
     </div>
   );
