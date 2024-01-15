@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 
 interface IUniversalButton {
     callBack: () => void
@@ -6,7 +6,7 @@ interface IUniversalButton {
     disabled: boolean
 }
 
-export const UniversalButton: FC<IUniversalButton> = ({callBack, title, disabled}) => {
+export const UniversalButton: FC<IUniversalButton> = memo(({callBack, title, disabled}) => {
   return (
     <>
       <button
@@ -18,4 +18,4 @@ export const UniversalButton: FC<IUniversalButton> = ({callBack, title, disabled
       </button>
     </>
   );
-};
+});

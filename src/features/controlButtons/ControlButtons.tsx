@@ -1,51 +1,23 @@
-import {ChangeEvent, useState} from 'react';
-
-import {useAppDispatch, useAppSelector} from '../../store';
+import {useAppSelector} from '../../store';
 
 import {UniversalButton} from '../../common';
 
-import {setClientName, setClientNameTC, setNewMessageTC, typeMessageTC} from './reducer/controlButtonsReducer.ts';
-
 import s from './ControlButtons.module.css';
+import {useControlButtons} from './helpers';
 
 export const ControlButtons = () => {
 
   const isSetName = useAppSelector(state => state.buttons.name);
 
-  const [message, setMessage] = useState<string>('');
-  const [name, setName] = useState<string>('');
-
-  const dispatch = useAppDispatch();
-
-  const onChangeTextareaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.currentTarget.value);
-  };
-
-  const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
-  };
-
-  const onClickSocketHandler = () => {
-    dispatch(setNewMessageTC(message));
-    setMessage('');
-  };
-
-  const onClickNameHandler = () => {
-    dispatch(setClientNameTC(name));
-    dispatch(setClientName(name));
-  };
-
-  const typeUserMessageHandler = () => {
-    dispatch(typeMessageTC());
-  };
-
-  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    typeUserMessageHandler();
-    if (e.key === 'Enter') {
-      onClickSocketHandler();
-
-    }
-  };
+  const {
+    name,
+    message,
+    onKeyDownHandler,
+    onChangeTextareaHandler,
+    onChangeInputHandler,
+    onClickNameHandler,
+    onClickSocketHandler,
+  } = useControlButtons();
 
   return (
     <div className={s.controlButtonsContainer}>

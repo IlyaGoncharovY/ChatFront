@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 
 import {useAppSelector} from '../../../../store';
 import {MessageType} from '../../reducer/chatDisplayReducer.ts';
@@ -9,7 +9,7 @@ interface IMessagesItem{
     message: MessageType
 }
 
-export const MessagesItem:FC<IMessagesItem> = ({message}) => {
+export const MessagesItem:FC<IMessagesItem> = memo(({message}) => {
 
   const name = useAppSelector(state => state.buttons.name);
 
@@ -25,4 +25,4 @@ export const MessagesItem:FC<IMessagesItem> = ({message}) => {
       </div>
     </div>
   );
-};
+});
