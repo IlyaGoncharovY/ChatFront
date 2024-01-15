@@ -1,5 +1,13 @@
 .messageContainer {
-    margin-bottom: 10px;
+    margin: 10px;
+    box-shadow: 0 0 7px #bc9740;
+    border-radius: 3px;
+    background-color: #f5daf5;
+    width: 60%;
+    height: auto;
+    /*min-height: 50px;*/
+    word-break:break-all;
+    padding: 10px;
 }
 
 .userMessage {
@@ -8,4 +16,27 @@
 
 .otherMessage {
     align-self: flex-start;
+}
+
+.messageName {
+
+}
+
+.messageMessage {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.messageContent {
+    display: flex;
+    flex-direction: column;
+    margin: 7px;
+}
+
+.userMessageContent {
+    align-items: flex-end;
+}
+
+.otherMessageContent {
+    align-items: flex-start;
 }
