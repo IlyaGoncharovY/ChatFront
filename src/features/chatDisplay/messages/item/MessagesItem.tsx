@@ -17,8 +17,12 @@ export const MessagesItem:FC<IMessagesItem> = ({message}) => {
 
   return (
     <div className={`${s.messageContainer} ${isUserMessage ? s.userMessage : s.otherMessage}`}>
-      <b>{message.user.name}:</b> {message.message}
-      <hr/>
+      <div className={`${s.messageContent} ${isUserMessage ? s.userMessageContent : s.otherMessageContent}`}>
+        <b>{message.user.name}:</b>
+        <div className={s.messageMessage}>
+          {message.message}
+        </div>
+      </div>
     </div>
   );
 };
