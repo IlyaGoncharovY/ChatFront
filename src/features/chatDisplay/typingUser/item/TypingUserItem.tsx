@@ -11,7 +11,7 @@ interface ITypingUserItem {
 export const TypingUserItem:FC<ITypingUserItem> = ({user}) => {
   return (
     <div className={s.typingUserContainer}>
-      <b>{user.name}:</b> .....
+      <b>{`${user.name}: ...`}</b>
     </div>
   );
 };
