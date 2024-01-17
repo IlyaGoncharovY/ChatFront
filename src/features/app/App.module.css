@@ -9,6 +9,20 @@ button {
     border-radius: 6px;
 }
 
+input:focus {
+    border: 1px solid #b8c1ec;
+    box-shadow: 0 0 3px #b8c1ec;
+    outline-offset: 0px;
+    outline: none;
+}
+
+textarea:focus {
+    border: 1px solid #b8c1ec;
+    box-shadow: 0 0 3px #b8c1ec;
+    outline-offset: 0px;
+    outline: none;
+}
+
 .appContainer {
     display: flex;
     justify-content: center;
