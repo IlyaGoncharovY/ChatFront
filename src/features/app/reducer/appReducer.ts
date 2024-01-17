@@ -1,25 +1,27 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {AppThunk} from '../../../store';
 import {api} from '../../../api';
+import {AppThunk} from '../../../store';
 import {setMessages, setNewMessage, setTypingUsers} from '../../chatDisplay';
 
 interface initialStateType {
-
+    inputError: string
 }
 
 const initialState: initialStateType = {
-
+  inputError: '',
 };
 
 const appSlice = createSlice({
   name: 'appReducer',
   initialState,
   reducers: {
-
+    setError: (state, action) => {
+      state.inputError = action.payload;
+    },
   },
 });
-export const {} = appSlice.actions;
+export const {setError} = appSlice.actions;
 
 export const createConnectionTC = (): AppThunk =>
   (dispatch) => {
