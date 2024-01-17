@@ -8,6 +8,7 @@ import {useControlButtons} from './helpers';
 export const ControlButtons = () => {
 
   const isSetName = useAppSelector(state => state.buttons.name);
+  const inputError = useAppSelector(state => state.app.inputError);
 
   const {
     name,
@@ -39,6 +40,7 @@ export const ControlButtons = () => {
           placeholder={'set message...'}
           className={s.textareaContainer}
         >
+          {inputError && <div>{inputError}</div>}
         </textarea>
         <UniversalButton callBack={onClickSocketHandler} title={'send'} disabled={!isSetName || !message}/>
       </div>
