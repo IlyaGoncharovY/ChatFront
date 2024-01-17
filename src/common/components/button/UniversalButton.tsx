@@ -12,7 +12,7 @@ export const UniversalButton: FC<IUniversalButton> = memo(({callBack, title, dis
       <button
         onClick={callBack}
         disabled={disabled}
-        style={disabled ? {cursor: 'no-drop'} : {cursor: 'pointer'}}
+        style={disabled ? {cursor: 'no-drop', background: '#ededf5'} : {cursor: 'pointer'}}
       >
         {title}
       </button>
