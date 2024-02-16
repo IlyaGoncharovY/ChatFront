@@ -40,7 +40,7 @@ export const ControlButtons = () => {
           placeholder={'set message...'}
           className={s.textareaContainer}
         >
-          {inputError && <div>{inputError}</div>}
+          {inputError && <div className={s.errorContainer}>{inputError}</div>}
         </textarea>
         <UniversalButton callBack={onClickSocketHandler} title={'send'} disabled={!isSetName || !message}/>
       </div>
